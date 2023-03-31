@@ -1,0 +1,36 @@
+/****** Cleansed DIM_CustomersTable ******/
+SELECT 
+      c.CustomerKey AS [CustomerKey]
+      --,[GeographyKey]
+      --,[CustomerAlternateKey]
+      --,[Title]
+      ,c.firstname AS [FirstName]
+      --,[MiddleName]
+      ,c.lastname AS [LastName]
+	  ,c.firstName + ' '+ c.lastname AS [FULL NAME]
+      --,[NameStyle]
+      --,[BirthDate]
+      --,[MaritalStatus]
+      --,[Suffix]
+      ,CASE c.gender WHEN 'M' THEN 'MALE' WHEN 'F' THEN 'FEMALE' END AS [Gender]
+      --,[EmailAddress]
+      --,[YearlyIncome]
+      --,[TotalChildren]
+      --,[NumberChildrenAtHome]
+      --,[EnglishEducation]
+      --,[SpanishEducation]
+      --,[FrenchEducation]
+      --,[EnglishOccupation]
+      --,[SpanishOccupation]
+      --,[FrenchOccupation]
+      --,[HouseOwnerFlag]
+      --,[NumberCarsOwned]
+      --,[AddressLine1]
+      --,[AddressLine2]
+      --,[Phone]
+      ,c.datefirstpurchase AS [DateFirstPurchase]
+      --,[CommuteDistance]
+	  ,g.city AS [Customer City] --Joined In Customer City from Geography Table
+  FROM dbo.DimCustomer as c
+  LEFT JOIN dbo.DimGeography as g ON g.GeographyKey = c.GeographyKey
+  ORDER BY CustomerKey ASC 
