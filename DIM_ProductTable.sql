@@ -1,0 +1,43 @@
+/****** Cleansed DIM_Product Table  ******/
+SELECT p.productkey AS [ProductKey]
+      ,p.productalternatekey AS [ProductAlternateKey]
+      --,[ProductSubcategoryKey]
+      --,[WeightUnitMeasureCode]
+      --,[SizeUnitMeasureCode]
+      ,p.englishproductname AS [EnglishProductName]
+      --,[SpanishProductName]
+      --,[FrenchProductName]
+      ,P.standardcost AS [StandardCost]
+      --,[FinishedGoodsFlag]
+      --,[Color]
+      --,[SafetyStockLevel]
+      --,[ReorderPoint]
+      --,[ListPrice]
+      --,[Size]
+      --,[SizeRange]
+      --,[Weight]
+      --,[DaysToManufacture]
+      ,p.productline AS [ProductLine]
+      --,[DealerPrice]
+      --,[Class]
+      --,[Style]
+      ,p.modelname AS [ModelName]
+      --,[LargePhoto]
+      ,p.englishdescription AS [EnglishDescription]
+      --,[FrenchDescription]
+      --,[ChineseDescription]
+      --,[ArabicDescription]
+      --,[HebrewDescription]
+      --,[ThaiDescription]
+      --,[GermanDescription]
+      --,[JapaneseDescription]
+      --,[TurkishDescription]
+      --,[StartDate]
+      --,[EndDate]
+      ,ISNULL (p.status,'Outdated') AS [Status]
+  FROM [dbo].[DimProduct] as p
+  LEFT JOIN dbo.DimProductSubcategory AS ps ON ps.ProductCategoryKey = p.ProductKey
+  LEFT JOIN dbo.DimProductCategory AS pc ON pc.ProductCategoryKey = ps.ProductCategoryKey
+
+  ORDER BY 
+  p.ProductKey ASC
